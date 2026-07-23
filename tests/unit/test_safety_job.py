@@ -79,6 +79,7 @@ async def test_budget_under_threshold_no_pause():
 async def test_budget_exactly_at_threshold_pauses():
     tenant = _mock_tenant(budget=10.0)
     session = AsyncMock()
+    session.add = MagicMock()
     result = MagicMock()
     result.scalar = MagicMock(return_value=9.50)  # exactly 95%
     session.execute = AsyncMock(return_value=result)
@@ -104,6 +105,7 @@ async def test_budget_exactly_at_threshold_pauses():
 async def test_budget_over_threshold_pauses():
     tenant = _mock_tenant(budget=10.0)
     session = AsyncMock()
+    session.add = MagicMock()
     result = MagicMock()
     result.scalar = MagicMock(return_value=9.99)  # 99.9%
     session.execute = AsyncMock(return_value=result)
@@ -155,6 +157,7 @@ async def test_error_rate_under_threshold_no_pause():
 async def test_error_rate_over_threshold_pauses():
     tenant = _mock_tenant()
     session = AsyncMock()
+    session.add = MagicMock()
     result = MagicMock()
     result.one = MagicMock(return_value=MagicMock(total=10, errors=3))  # 30%
     session.execute = AsyncMock(return_value=result)

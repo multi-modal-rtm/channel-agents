@@ -31,7 +31,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Textile Agents API",
+    title="Channel Agents API",
     version="0.1.0",
     lifespan=lifespan,
     docs_url="/docs" if settings.debug else None,

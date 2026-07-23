@@ -31,9 +31,9 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_USER: textile_test
-          POSTGRES_PASSWORD: textile_test
-          POSTGRES_DB: textile_agents_test
+          POSTGRES_USER: channel_test
+          POSTGRES_PASSWORD: channel_test
+          POSTGRES_DB: channel_agents_test
         ports:
           - 5432:5432
         options: >-
@@ -53,7 +53,7 @@ jobs:
           --health-retries 10
 
     env:
-      PG_TEST_ADMIN_DSN: postgresql+asyncpg://textile_test:textile_test@localhost:5432/textile_agents_test
+      PG_TEST_ADMIN_DSN: postgresql+asyncpg://channel_test:channel_test@localhost:5432/channel_agents_test
       REDIS_URL: redis://localhost:6379/0
       SECRET_KEY: ci-test-secret-key-not-for-production
       JWT_SECRET_KEY: ci-test-jwt-secret-key

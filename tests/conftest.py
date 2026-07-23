@@ -12,7 +12,7 @@ os.environ.setdefault("SECRET_KEY", "test-secret-key-for-pytest-not-for-prod-abc
 os.environ.setdefault("ENCRYPTION_KEY", "eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHg=")
 os.environ.setdefault(
     "DATABASE_URL",
-    "postgresql+asyncpg://postgres:postgres@localhost:5432/textile_agents",
+    "postgresql+asyncpg://postgres:postgres@localhost:5432/channel_agents",
 )
 
 import pytest  # noqa: E402

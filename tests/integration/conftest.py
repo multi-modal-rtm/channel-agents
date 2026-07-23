@@ -1,5 +1,5 @@
 """
-Integration test setup: spins up textile_agents_test on the local PG instance,
+Integration test setup: spins up channel_agents_test on the local PG instance,
 patches app.db.session to use it, seeds two tenants + users, provides an httpx client.
 
 Requires: $env:PG_TEST_ADMIN_DSN="postgresql://postgres:PASSWORD@localhost:5432/postgres"
@@ -23,7 +23,7 @@ from app.db.base import Base
 # ── DSNs ─────────────────────────────────────────────────────────────────────
 _ADMIN_RAW = os.getenv("PG_TEST_ADMIN_DSN", "postgresql://postgres:postgres@localhost:5432/postgres")
 _parsed = urlparse(_ADMIN_RAW)
-TEST_DB = os.getenv("PG_TEST_DB", "textile_agents_test")
+TEST_DB = os.getenv("PG_TEST_DB", "channel_agents_test")
 
 ADMIN_DSN: str = _ADMIN_RAW
 TEST_DSN: str = urlunparse(_parsed._replace(path=f"/{TEST_DB}"))

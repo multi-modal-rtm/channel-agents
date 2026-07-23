@@ -8,7 +8,7 @@ version: "3.9"
 
 services:
   app:
-    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/textile-agents}:latest
+    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/channel-agents}:latest
     env_file: .env
     restart: unless-stopped
     expose:
@@ -23,13 +23,13 @@ services:
       - migrate
 
   migrate:
-    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/textile-agents}:latest
+    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/channel-agents}:latest
     env_file: .env
     command: alembic upgrade head
     restart: "no"
 
   worker:
-    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/textile-agents}:latest
+    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/channel-agents}:latest
     env_file: .env
     command: python -m arq app.workers.arq_app.WorkerSettings
     restart: unless-stopped

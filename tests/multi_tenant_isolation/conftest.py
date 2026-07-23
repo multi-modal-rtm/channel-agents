@@ -1,7 +1,7 @@
 """
 Session-scoped fixtures for RLS isolation tests.
 
-Sets up a dedicated test database (textile_agents_test), creates all tables via
+Sets up a dedicated test database (channel_agents_test), creates all tables via
 SQLAlchemy, applies RLS policies via raw SQL, creates a non-superuser app role,
 and seeds two test tenants. Each test gets admin and app connections.
 
@@ -28,7 +28,7 @@ from app.db.base import Base
 # Override: $env:PG_TEST_ADMIN_DSN="postgresql://postgres:YOURPASS@localhost:5432/postgres"
 _ADMIN_RAW = os.getenv("PG_TEST_ADMIN_DSN", "postgresql://postgres:postgres@localhost:5432/postgres")
 _parsed = urlparse(_ADMIN_RAW)
-TEST_DB = os.getenv("PG_TEST_DB", "textile_agents_test")
+TEST_DB = os.getenv("PG_TEST_DB", "channel_agents_test")
 
 ADMIN_DSN: str = _ADMIN_RAW                                        # system db (create test db here)
 TEST_DSN: str = urlunparse(_parsed._replace(path=f"/{TEST_DB}"))   # test db, superuser

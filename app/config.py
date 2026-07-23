@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     # App
-    app_name: str = "textile-agents"
+    app_name: str = "channel-agents"
     environment: str = "development"
     debug: bool = False
     secret_key: str

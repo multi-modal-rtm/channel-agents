@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "textile-agents"
+name = "channel-agents"
 version = "0.1.0"
 description = "Multi-tenant AI sales automation for Instagram/Telegram (Uzbekistan SMEs)"
 requires-python = ">=3.12"

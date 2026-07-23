@@ -4,15 +4,15 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: textile
-      POSTGRES_PASSWORD: textile_dev
-      POSTGRES_DB: textile_agents
+      POSTGRES_USER: channel
+      POSTGRES_PASSWORD: channel_dev
+      POSTGRES_DB: channel_agents
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U textile"]
+      test: ["CMD-SHELL", "pg_isready -U channel"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -40,7 +40,7 @@ services:
       target: runtime
     env_file: .env
     environment:
-      DATABASE_URL: postgresql+asyncpg://textile:textile_dev@db:5432/textile_agents
+      DATABASE_URL: postgresql+asyncpg://channel:channel_dev@db:5432/channel_agents
       REDIS_URL: redis://redis:6379/0
       QDRANT_URL: http://qdrant:6333
     ports:
@@ -60,7 +60,7 @@ services:
       target: runtime
     env_file: .env
     environment:
-      DATABASE_URL: postgresql+asyncpg://textile:textile_dev@db:5432/textile_agents
+      DATABASE_URL: postgresql+asyncpg://channel:channel_dev@db:5432/channel_agents
       REDIS_URL: redis://redis:6379/0
       QDRANT_URL: http://qdrant:6333
     volumes:

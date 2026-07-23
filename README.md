@@ -1,4 +1,4 @@
-# Textile Agents
+# Channel Agents
 
 Multi-tenant AI agent platform for textile manufacturers. Handles customer inquiries over Telegram (and soon WhatsApp/Instagram), performs lead qualification, and answers product/FAQ questions — all with per-tenant cost controls, kill switches, and full audit trails.
 
@@ -36,8 +36,8 @@ Multi-tenant AI agent platform for textile manufacturers. Handles customer inqui
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/yourorg/textile-agents
-cd textile-agents
+git clone https://github.com/yourorg/channel-agents
+cd channel-agents
 uv venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 uv pip install -e ".[dev]"
 ```
@@ -73,7 +73,7 @@ alembic upgrade head
 
 ```bash
 python scripts/seed_dev.py
-# Creates "alpha" tenant with 20 products, 15 FAQs, 4 agents
+# Creates "demo" tenant with 20 products, 15 FAQs, 4 agents
 ```
 
 ### 6. Start the app
@@ -95,7 +95,7 @@ API at http://localhost:8000. Swagger docs at http://localhost:8000/docs.
 pytest tests/unit/ -x -q
 
 # Integration tests (requires local Postgres from step 3)
-export PG_TEST_ADMIN_DSN="postgresql+asyncpg://textile:textile_dev@localhost:5432/textile_agents"
+export PG_TEST_ADMIN_DSN="postgresql+asyncpg://channel:channel_dev@localhost:5432/channel_agents"
 pytest tests/integration/ -x -q
 
 # All tests
@@ -134,7 +134,7 @@ fly deploy
 ### Option D — Self-hosted (docker-compose)
 
 ```bash
-git clone https://github.com/yourorg/textile-agents && cd textile-agents
+git clone https://github.com/yourorg/channel-agents && cd channel-agents
 cp .env.example .env && nano .env   # fill all values
 
 docker compose -f docker-compose.prod.yml pull

@@ -1,6 +1,6 @@
 """Development seed script.
 
-Creates or updates the "alpha" textile manufacturer tenant with:
+Creates or updates the "demo" textile manufacturer tenant with:
 - 20 products (ko'rpa, yostiq, namatrasnik, topper, choyshab variants)
 - 15 FAQ entries (Uzbek + Russian)
 - Brand voice knowledge doc
@@ -30,7 +30,7 @@ from app.db.session import get_admin_session
 
 _fernet = Fernet(settings.encryption_key.encode())
 
-TENANT_SLUG = "alpha"
+TENANT_SLUG = "demo"
 
 PRODUCTS = [
     # sku, name_uz, name_ru, desc, price_uzs
