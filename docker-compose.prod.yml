@@ -1,0 +1,50 @@
+version: "3.9"
+
+# Production compose — Postgres/Redis/Qdrant are managed external services.
+# All connection strings come from the .env file (never committed).
+#
+# Deploy:
+#   docker compose -f docker-compose.prod.yml up -d
+
+services:
+  app:
+    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/textile-agents}:latest
+    env_file: .env
+    restart: unless-stopped
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+    depends_on:
+      - migrate
+
+  migrate:
+    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/textile-agents}:latest
+    env_file: .env
+    command: alembic upgrade head
+    restart: "no"
+
+  worker:
+    image: ghcr.io/${GITHUB_REPOSITORY:-yourorg/textile-agents}:latest
+    env_file: .env
+    command: python -m arq app.workers.arq_app.WorkerSettings
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    restart: unless-stopped
+    depends_on:
+      - app

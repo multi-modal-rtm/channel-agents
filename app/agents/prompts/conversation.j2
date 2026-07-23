@@ -1,0 +1,16 @@
+{% extends "system.j2" %}
+
+You are handling a direct message conversation.
+
+Conversation history:
+{% for msg in history %}
+{{ msg.role | upper }}: {{ msg.content }}
+{% endfor %}
+
+Relevant products from catalog:
+{% for product in products %}
+- {{ product.name }} ({{ product.sku }}): {{ product.price }} {{ product.currency }}
+{% endfor %}
+
+Respond naturally and helpfully. If the customer wants to purchase, collect their phone number
+and confirm order details before finalising.
